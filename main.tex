@@ -1,0 +1,251 @@
+\documentclass[a4paper]{article}
+
+\def\npart {IV}
+\def\nterm {Spring}
+\def\nyear {2021}
+\def\nlecturer {梁灿彬}
+\def\ncourse {微分几何}
+
+\input{header.tex}
+
+\begin{document}
+\maketitle
+\vspace*{10cm}
+\begin{center}
+    \large{参考教材:} 微分几何和广义相对论[第二版]
+\end{center}
+\thispagestyle{empty}
+
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage
+\setcounter{page}{1}
+
+\section{拓扑空间介绍}
+\subsection{集论初步}
+
+\begin{concept}
+    确切地指定了的若干事物的全体叫一个集合，简称集。
+\end{concept}
+\begin{concept}
+    集中的每一事物叫一个元素或点。
+\end{concept}
+
+\begin{concept}
+    不含元素的集叫空集，记作$ \varnothing  $。
+\end{concept}
+
+\begin{ndefi}
+    若集$ A $的每一元素都属于集$ X $，就说$ A $是$ X $的\textbf{子集(subset)}，也说$ A $含于(is contained in)$ X $或$ X $含(contains)$ A $，记作$ A \subset X $且$ A \neq X $。规定$ varnothing $是任一集合的子集。若$ A \subset X $且$ A \neq X $，则将$ A $称为$ X $的\textbf{真子集(proper subset)}。若$ X \subset Y $且$ Y \subset X $，则称集$ X $和集$ Y $为相等的，记作$ X = Y $。
+\end{ndefi}
+
+\begin{ndefi}
+    集合$ A,B $的并集、交集、差集和补集定义为： \\
+    \textbf{并集(union) $ A \cup B $}$ :=\{x | x \in A \text{或} x \in B\} $； \\
+    \textbf{交集(intersection) $ A \cap B $} $ := \{x | x \in A, x \in B \} $； \\
+    \textbf{差集(difference) $ A - B $} $ :=\{ x | x \in A, x \notin B \} $； \\
+    \textbf{补集(complement) $ -A $} $ := \{ x | x \in X, x \notin A, A \subset X \} $。
+\end{ndefi}
+
+\begin{nthm}
+    以上集运算符合以下规律： \\
+    \textbf{交换律} $ A \cup B = B \cup A, \qquad A \cap B = B \cap A $ \\
+    \textbf{结合律} $ (A \cup B) \cup C = A \cup (B \cup C), \quad (A \cap B) \cap C = A \cap (B \cap C) $ \\
+    \textbf{分配律} $ (A \cap B) \cup C = (A \cup C) \cap (B \cup C), (A \cup B) \cap C = (A \cap C) \cup (B \cap C) $  \\
+    \textbf{De Morgan律} $ A - (B \cup C) = (A - B) \cap (A - C), \qquad A - (B \cap C) = (A - B) \cup (A - C) $
+\end{nthm}
+
+\begin{ndefi}
+    非空集合$ X,Y $的\textbf{卡氏积(Cartesian product) $ X \times Y $}定义为
+    \begin{equation*}
+        X \times Y := \{ (x,y) | x \in X , y \in Y \}
+    \end{equation*}
+    就是说，$ X \times Y $是一个由有序对$ (x,y) $组成的集合，其中每一元素是由$ X $的一个元素$ x $和$ Y $的一个元素$ y $组成。多个(有限个)集合的卡氏积可类似地定义为：
+    \begin{equation*}
+        X \times Y \times Z := \{ (x,y,z) | x \in X, y \in Y, z \in Z \}
+    \end{equation*}
+    卡氏积满足结合律，即$ (X \times Y) \times Z = X \times (Y \times Z) $。
+\end{ndefi}
+
+\begin{ndefi}
+    $ \R^{n} $的任意两个元素$ x=(x^{1}, \cdots, x^{n}), y=(y^{1}, \cdots, y^{n}) $之间的\textbf{距离(distance)}$ \abs{y-x} $定义为$ \abs{y-x}:=\sqrt{\sum_{i=1}^{n}(y^{i}-x^{i})^{2}} $
+\end{ndefi}
+
+\begin{ndefi}
+    设$ X,Y $为非空集合，一个从$ X $到$ Y $的\textbf{映射(map)}，记作$ f: X \to Y $，是一个法则，它给$ X $的每一元素指定$ Y $的唯一的对应元素。若$ y \in Y $是$ x \in X $的对应元素，就写$ y=f(x) $，并称$ y $为$ x $在映射$ f $下的\textbf{像(image)}，称$ x $为$ y $的\textbf{原像(或逆像inverse image)}。$ X $称为映射$ f $的\textbf{定义域(domain)}，$ X $的全体元素在映射$ f $下的像的集合(记作$ f[X] $)称为映射$ f: X \to Y $的\textbf{值域(range)}。若$ f(x)=f^{'}(x) \quad \forall x \in X $。
+    通常把$ y=f(x) $写成$ f:x \mapsto y $。
+\end{ndefi}
+
+\begin{ndefi}
+    若任一$ y \in Y $有不多于一个逆像(可以没有)，则映射$ f: X \to Y $叫\textbf{一一的(onr-to-one)}。若任一$ y \in Y $都有逆像(可多于一个)，则映射$ f:X \to Y $叫\textbf{到上的(onto)}。
+\end{ndefi}
+
+\begin{ndefi}
+    若$ f(x)=f(x^{'}) \quad \forall x,x^{'} \in X $，则$ f:X \to Y $称为常值映射。
+\end{ndefi}
+
+\begin{ndefi}
+    设$ X,Y,Z $为集，$ f: X \to Y $和$ g:Y \to Z $为映射，则$ f $和$ g $的\textbf{复合映射$ f \circ g $}是从$ X $到$ Z $的映射，定义为$ (f \circ g)(x):=g(f(x)) \in Z \quad \forall x \in X $。
+\end{ndefi}
+
+
+\subsection{拓扑空间}
+
+\begin{concept}
+    $ \R $的子集分为开子集和非开子集两大类，开子集具有三个性质，对任意非空集合$ X $，可指定其中某些子集是开的，其他为非开的。开子集的三大性质分别为：
+    \begin{enumerate}
+        \item $ X $本身和空集$ \varnothing $为开子集；
+        \item 有限个开子集之交为开子集；
+        \item 任意个(可以有限个也可以无限个)开子集之并为开子集。
+    \end{enumerate}
+\end{concept}
+
+\begin{concept}
+    拓扑结构为每种满足上述三要求的指定给集合$ X $赋予的附加结构，定义了拓扑结构的集合$ X $的全体开子集也组成一个集合，称为$ X $的一个\textbf{拓扑(topology)}，记作$ \mathcal{T}  $。
+\end{concept}
+
+\begin{ndefi}
+    非空集合$ X $的一个\textbf{拓扑(topology)}$ \mathcal{T} $是$ X $的若干子集的集合，满足：
+    \begin{enumerate}
+        \item $ X, \varnothing \in \mathcal{T} $；
+        \item 若$ O_{i} \in \mathcal{T}, i=1,2,\cdots,n $，则$ \bigcap_{i=1}^{n} O_{i} \in \mathcal{T} $；
+        \item 若$ O_{a} \in \mathcal{T} \forall a $，则$ \bigcup_{a} O_{a} \in \mathcal{T} $。
+    \end{enumerate}
+\end{ndefi}
+
+\begin{ndefi}
+    指定了拓扑$ \mathcal{T} $的集合$ X $称为\textbf{拓扑空间(topological space)}。若$ O \in \mathcal{T} $，则拓扑空间$ X $的子集$ O $称为\textbf{开子集}(简称\textbf{开集})。
+\end{ndefi}
+
+\begin{concept}
+    设$ X $为任意非空集合，令$ \mathcal{T} $为$ X $的全部子集的集合，则构成$ X $的一个拓扑，叫\textbf{离散拓扑(discrete topology)}。
+\end{concept}
+
+\begin{concept}
+    设$ X $为任意非空集合，令$ \mathcal{T} = \{ X, \varnothing \} $，则构成$ X $的一个拓扑，叫\textbf{凝聚拓扑(indiscrete topology)}。
+\end{concept}
+
+凝聚拓扑是元素最少的拓扑，离散拓扑是元素最多的拓扑。
+
+\begin{concept}
+    设$ X $为任意非空集合，令$ \mathcal{T} := \{ \text{空集或}\R $中能表为开区间之并的子集$ \} $ 称为$ \R $的\textbf{通常拓扑}。
+\end{concept}
+
+\begin{concept}
+    设$ X = \R^{n} $，则$ \mathcal{T} := \{\text{空集或}\R $中能表为开球之并的子集$ \} $称为$ \R^{n} $的\textbf{通常拓扑}，其中\textbf{开球(open ball)}定义为$ B(x_{0}, r) := \{ x \in \R^{n} | \abs{x - x_0} < r \} $，$ x_{0} $称为球心，$ r > 0 $称为半径。
+\end{concept}
+
+\begin{concept}
+    设$ (X_{1}, \mathcal{T}_{1}) $和$ (X_{2}, \mathcal{T}_{2}) $为拓扑空间，$ X = X_{1} \times X_{2} $，定义$ X $的拓扑为：
+    \begin{equation}
+        \mathcal{T} := \{ O \subset X | O \text{可表为形如}O_{1} \times O_{2} \text{的子集之并，} O_{1} \in \mathcal{T}_{1}, O_{2} \in \mathcal{T}_{2} \}
+    \end{equation}
+    则$ \mathcal{T} $称为$ X $的\textbf{乘积拓扑(product topology)}。
+\end{concept}
+
+\begin{concept}
+    设$ (X, \mathcal{T}) $是拓扑空间，$ A $为$ X $的任一非空子集，把$ A $看成集合，当然也可指定拓扑(记作$ \mathcal{S} $)是$ A $成为拓扑空间，记作$ (A, \mathcal{S}) $。由于$ A $是$ X $的子集，那么定义
+    \begin{equation*}
+        \mathcal{S} := \{ V \subset A | \exists O \in \mathcal{T} \text{使} V = A \cap O \}
+    \end{equation*}
+    定义这样的$ \mathcal{S} $叫做$ A(\subset X) $的、由$ \mathcal{T} $导出的\textbf{诱导拓扑(induced topology)}。$ (A, \mathcal{S}) $称为$ ( X, \mathcal{T} ) $的\textbf{拓扑子空间(topological subspace)}。
+\end{concept}
+
+\begin{ndefi}
+    设$ (X, \mathcal{T}) $和$ (Y, \mathcal{S}) $为拓扑空间。若$ f^{-1}[O] \in \mathcal{T} \quad \forall O \in \mathcal{S} $，则映射$ f:X \to Y $称为\textbf{连续的(continuous)}。
+\end{ndefi}
+
+\begin{ndefi}
+    设$ (X, \mathcal{T}) $和$ (Y, \mathcal{S}) $为拓扑空间。若$ \forall $满足$ f(x) \in G^{'} $的$ G^{'} \in \mathcal{S}, \exists G \in \mathcal{T} $使$ x \in G $且$ f[G] \subset G^{'} $，则映射$ f: X \to Y $称为\textbf{在点$ x \in X $处连续}。若它在所有点$ x \in X $上连续，则$ f: X \to Y $称为\textbf{连续}。
+\end{ndefi}
+
+\begin{ndefi}
+    若$ \exists $映射$ f: X \to Y $，满足：
+    \begin{enumerate}
+        \item $ f $是一一到上的；
+        \item $ f $及$ f^{-1} $都连续
+    \end{enumerate}
+    则拓扑空间$ (X, \mathcal{T}) $和$ (Y, \mathcal{S}) $称为\textbf{相互同胚(homeomorphic to each other)}。这样的$ f $称为从$ (X, \mathcal{T}) $到$ (Y, \mathcal{S}) $的\textbf{同胚映射}，简称\textbf{ 同胚(homeomorphic) }。
+\end{ndefi}
+
+\begin{concept}
+    普通函数$ y=f(x) $的连续性和可微性用$ C^{r} $表示，其中$ r $为非负整数，$ C^{0} $代表连续，$ C^{r} $代表$ r $阶导函数存在并连续，$ C^{\infty} $代表任意阶导函数存在并连续[称为\textbf{光滑(smooth)}]。
+\end{concept}
+
+\begin{ndefi}
+    若$ \exists O \in \mathcal{T} $使$ x \in O \subset N $，则$ N \subset X $称为$ x \in X $的一个\textbf{领域(neighborhood)}。自身是开基的领域称为\textbf{开领域}。
+\end{ndefi}
+
+\begin{ndefi}(子集的领域)
+    若$ \exists O \in \mathcal{T} $使$ A \subset O \subset N $，则$ N \subset X $称为$ A \subset X $的一个\textbf{领域}。
+\end{ndefi}
+
+\begin{nthm}
+    $ A \subset X $是开集，当且仅当$ A $是$ x $的领域$ \forall x \in A $。
+\end{nthm}
+
+\begin{ndefi}
+    若$ -C \in \mathcal{T} $，则$ C \subset X $叫\textbf{闭集(closed set)}。
+\end{ndefi}
+
+\begin{nthm}
+    闭集有以下性质：
+    \begin{enumerate}
+        \item 任意个闭集的交集是闭集；
+        \item 有限个闭集的并集是闭集；
+        \item $ X $及$ \varnothing $是闭集。
+    \end{enumerate}
+\end{nthm}
+
+\begin{ndefi}
+    若除$ X $和$ \varnothing $外没有即开又闭的子集，则拓扑空间$ (X, \mathcal{T}) $称为\textbf{连通的(connected)}。
+\end{ndefi}
+
+\begin{ndefi}
+    设$ (X, \mathcal{T}) $为拓扑空间，$ A \subset X $。$ A $的\textbf{闭包(closure)}$ \overline{A} $是所有含$ A $的闭集的交集，即
+    \begin{equation*}
+        \overline{A} := \bigcap_{a} C_{a}. \quad A \subset C_{a}, \quad \text{且} C_{a} \text{为闭。}
+    \end{equation*}
+\end{ndefi}
+
+\begin{ndefi}
+    设$ (X, \mathcal{T}) $为拓扑空间，$ A \subset X $。$ A $的\textbf{内部(interior)}$ i(A) $是所有含于$ A $的开集的并集，即
+    \begin{equation*}
+        i(A) := \bigcup_{a} O_{a}, \quad O_{a} \subset A, \quad O_{a} \in \mathcal{T}
+    \end{equation*}
+\end{ndefi}
+
+\begin{ndefi}
+    设$ (X, \mathcal{T}) $为拓扑空间，$ A \subset X $。$ A $的\textbf{边界(boundary)}$ \dot{A} := \overline{A} - i(A) $，$ x \in \dot{A} $称为\textbf{边界点}。$ \dot{A} $也记作$ \partial A $。
+\end{ndefi}
+
+\begin{nthm}
+    $ \overline{A}, i(A), \dot{A} $有以下性质：
+    \begin{enumerate}
+        \item \begin{itemize}
+                  \item $ \overline{A} $为闭集；
+                  \item $ A \subset \overline{A} $;
+                  \item $ A = \overline{A} $当且仅当$ A $为闭集；
+              \end{itemize}
+        \item \begin{itemize}
+                  \item $ i(A) $为开集；
+                  \item $ i(A) \subset A $；
+                  \item $ i(A) = A $当且仅当$ A \in \mathcal{T} $；
+              \end{itemize}
+        \item $ \dot{A} $为闭集。
+    \end{enumerate}
+\end{nthm}
+
+\begin{ndefi}
+    若$ A \subset \bigcup_{a} O_{a} $，则$ X $的开子集的集合$ \{ O_{a} \} $叫$ A \subset X $的一个\textbf{开覆盖(open cover)}。也可以说$ \{ O_{a} \} $覆盖$ A $。
+\end{ndefi}
+
+\subsection{紧致性}
+
+\begin{ndefi}
+    设$ \{ O_{a} \} $是$ A \subset X $的开覆盖(open cover)，若$ \{ O_{a} \} $的有限个元素构成的子集$ \{ O_{a_{1}}, \cdots, O_{a_{n}} \} $也覆盖$ A $，就说$ \{ O_{a} \} $有\textbf{有限子覆盖(finite subcover)}。
+\end{ndefi}
+
+\end{document}
